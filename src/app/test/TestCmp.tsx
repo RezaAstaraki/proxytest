@@ -14,7 +14,7 @@ export default function TestCmp({}: Props) {
     const [response3, setResponse3] = useState<Awaited<ReturnType<any>> | undefined>();
 
     const fetcher = async () => {
-        const res = await fetch("/api/getheaders", {
+        const res = await fetch("https://bitanatoken.io/api/getheaders", {
             cache: 'no-store',
         });
         const js = await res.json();
@@ -22,6 +22,7 @@ export default function TestCmp({}: Props) {
     };
     const fetcher2 = async () => {
         const res = await ipFetcherAction();
+        console.log('res fetcher 2',res)
         setResponse2(res);
     };
 

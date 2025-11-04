@@ -88,6 +88,7 @@ export const ipFetcherActionXFF = async (clientIpFromBrowser?: string) => {
         ...(xff && { "X-Forwarded-For": xff }),
       },
     });
+    console.log(res)
     const routerResponse = await res.json();
     console.log("router endpoint response:", routerResponse);
     
