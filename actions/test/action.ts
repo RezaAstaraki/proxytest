@@ -44,6 +44,13 @@ export const ipFetcherAction = async () => {
   return allHeaders;
 };
 
+export const ipFetcherAction2 = async () => {
+  'use server';
+  const headersList = await headers();
+  const allHeaders = Object.fromEntries(headersList.entries());
+  return allHeaders;
+};
+
 export const fetchExternalHeadersAction = async () => {
   "use server";
   const res = await fetch("https://bitanatoken.io/api/getheaders", {

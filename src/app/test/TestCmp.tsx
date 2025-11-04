@@ -4,7 +4,7 @@
 // import { clientUrlMaker } from '@/src/lib/clientUtils';
 // import { ServerUrlMaker } from '@/src/lib/serverUtils';
 import { useEffect, useState } from 'react';
-import { ipFetcherAction, ipFetcherActionXFF, fetchExternalHeadersAction } from '../../../actions/test/action';
+import { ipFetcherAction, ipFetcherActionXFF, fetchExternalHeadersAction, ipFetcherAction2 } from '../../../actions/test/action';
 
 type Props = {};
 
@@ -12,6 +12,7 @@ export default function TestCmp({}: Props) {
     const [response, setResponse] = useState<any>();
     const [response2, setResponse2] = useState<any>();
     const [response3, setResponse3] = useState<Awaited<ReturnType<any>> | undefined>();
+    const [response4, setResponse4] = useState<Record<string, string> | undefined>(undefined);
 
     const fetcher = async () => {
         const js = await fetchExternalHeadersAction();
@@ -23,10 +24,17 @@ export default function TestCmp({}: Props) {
         setResponse2(res);
     };
 
+    const fetcher4 = async () => {
+        const res = await ipFetcherAction2();
+
+        setResponse4(res);
+    };
+
 
     useEffect(() => {
         fetcher();
         fetcher2();
+        fetcher4();
     }, []);
 
 
@@ -40,6 +48,11 @@ export default function TestCmp({}: Props) {
                 <hr />
                 <p>server action</p>
                 <pre className='scroll-auto'>{JSON.stringify(response2, null, 4)}</pre>
+            </div>
+            <div className="border max-w-dvw">
+                <hr />
+                <p>headers that server action get</p>
+                <pre>{JSON.stringify(response4, null, 4)}</pre>
             </div>
         </div>
     );
