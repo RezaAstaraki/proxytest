@@ -4,7 +4,7 @@
 // import { clientUrlMaker } from '@/src/lib/clientUtils';
 // import { ServerUrlMaker } from '@/src/lib/serverUtils';
 import { useEffect, useState } from 'react';
-import { ipFetcherAction, ipFetcherActionXFF } from '../../../actions/test/action';
+import { ipFetcherAction, ipFetcherActionXFF, fetchExternalHeadersAction } from '../../../actions/test/action';
 
 type Props = {};
 
@@ -14,10 +14,7 @@ export default function TestCmp({}: Props) {
     const [response3, setResponse3] = useState<Awaited<ReturnType<any>> | undefined>();
 
     const fetcher = async () => {
-        const res = await fetch("https://bitanatoken.io/api/getheaders", {
-            cache: 'no-store',
-        });
-        const js = await res.json();
+        const js = await fetchExternalHeadersAction();
         setResponse(js);
     };
     const fetcher2 = async () => {

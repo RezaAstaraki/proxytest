@@ -44,6 +44,16 @@ export const ipFetcherAction = async () => {
   return allHeaders;
 };
 
+export const fetchExternalHeadersAction = async () => {
+  "use server";
+  const res = await fetch("https://bitanatoken.io/api/getheaders", {
+    cache: "no-store",
+  });
+  // If the endpoint doesn't return JSON, this will throw
+  const data = await res.json();
+  return data;
+};
+
 export const ipFetcherActionXFF = async (clientIpFromBrowser?: string) => {
   const headersList = await headers();
 
